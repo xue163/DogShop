@@ -1,27 +1,26 @@
 <template>
   <div id="footer-waper">
       <span class="index-a guide_item " :class="{on:$route.path==='/miste'}" @click="goto('/miste')">
-       <span class="item_icon">
+       <span class="item_icon" >
         <i class="iconfont icon-fangwuxinxi"></i>
          </span>
         <span>首页</span>
       </span>
 
-      <span class="type-a guide_item" :class="{on:$route.path==='/list'}" @click="goto('/list')">
+      <span class="type-a guide_item" :class="{on:$route.path==='/list/tab1'}" @click="goto('/list/tab1')">
           <span class="item_icon">
           <i class="iconfont icon-fenlei"></i>
         </span>
         <span>分类</span>
       </span>
-
-      <span class="cart-a guide_item" :class="{on:$route.path==='/shopcart'}" @click="goto('/ShopCart')">
+      <span class="cart-a guide_item" :class="{on:$route.path==='/shopcart'}" @click="goto('/shopcart')">
         <span class="item_icon">
         <i class="iconfont icon-gouwuche"></i>
       </span>
         <span>购物车</span>
       </span>
 
-      <span class="myepet-a guide_item" :class="{on:$route.path==='profile'}" @click="goto('/profile')">
+      <span class="myepet-a guide_item" :class="{on:$route.path==='/profile'}" @click="goto('/profile')">
         <span class="item_icon">
         <i class="iconfont icon-xiaolian"></i>
         </span>
@@ -59,7 +58,7 @@
       align-items center
       margin 5px
       color #999999
-      /*&.on*/
-        /*color #afc*/
+      &.on
+        color lightgreen
 
 </style>

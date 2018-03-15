@@ -26,3 +26,23 @@ top-border-1px($color)
     height 1px
     background $color
     transform scaleY(0.5)
+//    input表单
+  input-text($url)
+    .putong-top
+      width 90%
+      height 46px
+      margin  5px auto
+      line-height 46px
+      border-bottom 1px solid #e2e2e2
+      padding-left 10px
+      >input
+        outline none
+      &>.icon1
+        background-image url("./image/"+$url+".png")
+        background-repeat no-repeat
+        background-size 100%
+        width 17px
+        height 21px
+        display inline-block
+        vertical-align middle
+        margin-right 5px
