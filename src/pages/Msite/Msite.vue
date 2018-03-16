@@ -180,6 +180,8 @@
       </div>
 
     </div>
+    <!--眨眼狗-->
+    <span class="dog"></span>
     </div>
 </template>
 <script type="text/javascript">
@@ -347,6 +349,27 @@
         margin: 10px 10px 0 10px;
         padding-bottom: 25px;
         font-size: 12px;
+    .dog
+      position fixed
+      right 0
+      bottom 100px
+      width 42.5px
+      height 47px
+      z-index 20
+      background-image: url('./godog.png')
+      background-size 85px 47px
+      animation: godog 1s steps(1,end) infinite
+    @keyframes godog
+      0%
+        background-position 0 0
+      50%
+        background-position: -42.5px 0
+      100%
+        background-position: 0 0
+
+
+
+
   /*nammag*/
 
 </style>

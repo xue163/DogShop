@@ -4,7 +4,7 @@
     <!--头部区-->
     <div class="login-bg">
       <div class="head-top">
-        <a href="javascript:;" class="aback"></a>
+        <a href="javascript:;" class="aback" @click="goto"></a>
         <a href="javascript:;" class="aback2">注册</a>
       </div>
     <div class="head-bottom">
@@ -57,21 +57,39 @@
             </div>
           </div>
          <!--完成-->
-        <p>忘记密码？</p>
-        <input type="submit" value="登录">
+        <p class="p1">忘记密码？</p>
+        <input type="submit" value="登录" class="sub">
+        <!--支付宝微信登录-->
+        <div class="three">
+          <p>合作网站登录</p>
+          <a href="javascript:;">
+            <img src="./image/zhifu-icon.png" >
+          </a>
+          <a href="javascript:;">
+            <img src="./image/qq-icon.png" >
+          </a>
+        </div>
       </form>
     </div>
   </header>
   </div>
 </template>
 <script type="text/javascript">
-  export default{}
+  export default{
+    methods:{
+      goto(){
+        this.$router.back()
+      }
+    }
+  }
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../common/stylus/mixin.styl"
 #login-wrap
    width 100%
    header
+     overflow hidden
+     padding-bottom 60px
      .login-bg
        position relative
        background-image url("./image/img1.png")
@@ -182,6 +200,35 @@
              font-size 12px
              color red
 
+
+
+     .p1
+       color #898989
+       float right
+       margin 5px 28px 0px
+     .sub
+       background #2ec975
+       width 80%
+       display inline-block
+       height 40px
+       text-align center
+       line-height 30px
+       margin  12px 10%
+       font-size 15px
+       border-radius 5px
+       color #fff
+
+     .three
+       margin-top 50px
+       text-align center
+       color #ddd
+       &>a
+         width 60px
+         height 60px
+         &>img
+           width 60px
+           height 60px
+           margin-right 30px
 
 
   /*fafa*/

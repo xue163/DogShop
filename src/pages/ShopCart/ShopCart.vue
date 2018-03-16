@@ -97,6 +97,7 @@
     align-items center
     padding-bottom 10px
     border-bottom 1px solid #ddd
+    background #fff
     >a
       flex 1
       text-align center
@@ -150,7 +151,6 @@
       width 100px
       height 100px
       margin 100px auto 20px
-
     .cc
       color #dbdbdb
     .mr
