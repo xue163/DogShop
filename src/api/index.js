@@ -5,5 +5,12 @@
 import axios from 'axios'
 
 export const getURL = (url) => axios.get(url)
+//短信验证码获取
+export const reqmsgcode = (phone) =>axios.get('/api/sendcode',{phone})
+//一次性验证码获取
+export const reqcodelogin = (phone,code) =>axios.post('/api/login_sms',{phone,code})
+
+
+
 
 

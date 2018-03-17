@@ -4,56 +4,57 @@
     <!--头部区-->
     <div class="login-bg">
       <div class="head-top">
-        <a href="javascript:;" class="aback" @click="goto"></a>
+        <span  class="aback" @click="$router.back()"></span>
         <a href="javascript:;" class="aback2">注册</a>
       </div>
     <div class="head-bottom">
-      <a href="javascript:;" >普通登录
-      <i class="jiao1" style="display:none"></i>
+      <a href="javascript:;" @click="login">普通登录
+      <i class="jiao1" v-show="putong"></i>
       </a>
-      <a href="javascript:;" >手机动态密码登录
-      <i class="jiao2"></i>
+      <a href="javascript:;" @click="login">手机动态密码登录
+      <i class="jiao2" v-show="phone"></i>
       </a>
     </div>
     </div>
     <!--登录区-->
     <div class="login">
-      <form class="login-form">
+      <form class="login-form" @submit.prevent="loginto">
         <!--普通登录-->
-         <div class="putong" style="display: none">
+         <div class="putong"  v-show="putong">
            <div class="putong-tops">
            <div class="putong-top">
              <span class="icon1"></span>
-             <input type="text" class="text" placeholder="手机号/邮箱/用户">
+             <input type="text" class="text" placeholder="手机号/邮箱/用户" v-model="putongname">
            </div>
            </div>
            <div class="putong-bottoms">
            <div class="putong-top">
              <span class="icon1"></span>
-             <input type="text" placeholder="输入密码">
+             <input type="text" placeholder="输入密码" v-model="putongpwd">
            </div>
            </div>
          </div>
         <!--手机动态密码登录-->
-          <div class="phone">
+          <div class="phone" v-show="phone" >
              <!---->
             <div class="phone-tops">
               <div class="putong-top">
                 <span class="icon1"></span>
-                <input type="text" class="text" placeholder="已注册的手机号">
+                <input type="text" class="text" placeholder="已注册的手机号" v-model="phonename">
               </div>
             </div>
             <!--获取一次性验证码-->
             <div class="phone-middle">
                 <span class="icon1"></span>
-                <input type="text" class="text" placeholder="请输入图片内容">
-                <img src="./image/seccode.jpg" >
+                <input type="text" class="text" placeholder="请输入图片内容" v-model="captcha">
+                <img :src="url" @click="changeURL"    style="width: 100px;float: right" >
             </div>
             <!--获取动态密码-->
             <div class="phone-bottom">
               <span class="icon2"></span>
-              <input type="text" placeholder="动态密码">
-              <a href="javascript:;">获取动态密码</a>
+              <input type="text" placeholder="动态密码" v-model="code">
+              <a href="javascript:;" v-show="!computeTime" @click="getCode">获取动态密码</a>
+              <span v-show="computeTime">{{computeTime}} s</span>
             </div>
           </div>
          <!--完成-->
@@ -72,15 +73,97 @@
       </form>
     </div>
   </header>
+    <AlertTip v-if="alertShow" :alertText="alertText" />
   </div>
 </template>
 <script type="text/javascript">
+  import AlertTip from '../../components/AlertTip/AlertTip.vue'
   export default{
-    methods:{
-      goto(){
-        this.$router.back()
+    data(){
+      return {
+        putong:true,//显示普通登录
+        phone:false,//显示手机动态码登录
+        url:'https://wap.epet.com/share/seccode.html?hash=5157',//获取一次性验证码
+        alertShow:false,//提示信息
+        alertText:'',//提示文本信息
+        putongname:'',//普通登录的用户名和邮箱
+        putongpwd:'',//普通登录的密码
+        phonename:'',//手机登录
+        captcha:'',//一次性验证码输入
+        code:'',//动态密码
+        computeTime:0//倒计时
       }
-    }
+    },
+    methods:{
+      goto(){   //回退按钮
+        this.$router.back()
+      },
+      login(){//手机短信登录切换
+        this.putong = !this.putong
+        this.phone = !this.phone
+      },
+      changeURL(){//点击一次性验证码进行切换
+        this.url = 'http://localhost:3000/captcha?t='+Math.random()
+      },
+      //点击获取动态码
+   async getCode(){
+//        this.computeTime = 60
+//        let t = setInterval(()=>{
+//          this.computeTime--
+//          if(computeTime<=0){
+//            clearInterval(t)
+//          }
+//        },1000)
+//          const {phonename} =  this//发送手机号收取短信验证码
+//         const result = await reqmsgcode({phonename})
+//       if(result.code===1){
+//          this.alertShow = true
+//         this.alertText = result.msg
+//       }
+     console.log(111)
+      },
+
+
+      //提交按钮
+     async loginto(){
+        if(this.putong){//如果是普通登录
+          const {rightPhone,putongpwd} = this
+         if(!rightPhone) {//用户手机号邮箱验证
+            this.alertShow = true
+           this.alertShow = '普通登录的请输入正确的手机号邮箱'
+         }else if(!putongpwd){//普通登录验证邮箱号
+           this.alertShow = true
+           this.alertShow = '普通登录的请输入密码'
+         }
+        }else if(this.phone){//如果是手机动态验证码登录
+          const {phonename,captcha,code} = this //获取用户名，一次性验证码，动态密码
+            if(!phonename){
+              this.alertShow = true
+              this.alertText = '请输入正确的用户名'
+            }else if(!captcha){
+              this.alertShow = true
+              this.alertText = '请输入正确的验证码'
+            }
+            const pwd = 123456
+//          const result = await reqcodelogin({phonename,pwd,code})
+//            if(result.code===0){
+//              const userInfo = result.data
+//              this.$store.dispatch('saveUserInfo',userInfo)//保存用户信息
+//
+//            }
+          if(result.code===1){
+            this.alertShow = true
+            this.alertText = result.msg//如果输入的一次性验证码不正确，交给后台去验证，返回后台的验证信心
+          }
+        }
+      }
+    },
+    computed:{
+      rightPhone(){
+        return /^1\d{10}$/.test(this.putongname)&&/[a-zA-Z0-9_-]/.test(this.putongname)
+      }
+    },
+    components:{AlertTip}
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>

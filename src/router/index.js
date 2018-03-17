@@ -10,6 +10,7 @@ import ShopCart from '../pages/ShopCart/ShopCart.vue'
 import Profile from '../pages/Profile/Profile.vue'
 import Fenlei from '../pages/List/Fenlei/Fenlei.vue'
 import Pinpai from '../pages/List/Pinpai/Pinpai.vue'
+import Allpinpai from '../pages/List/Allpinpai/Allpinpai.vue'
 
 Vue.use(VueRouter)
 
@@ -17,23 +18,35 @@ export default new VueRouter({
   routes:[
     {
       path:'/miste',
-      component:Miste
+      component:Miste,
+      meta:{
+        showFoot:true
+      }
     },
     {
       path:'/list',
       component:List,
+      meta:{
+        showFoot:true
+      },
       children:[
         {
           path:'/list/tab1',
-          component:Fenlei
+          component:Fenlei,
+          meta:{
+            showFoot:true
+          },
         },
         {
           path:'/list/tab2',
-          component:Pinpai
+          component:Pinpai,
+          meta:{
+            showFoot:true
+          }
         },
         {
           path:'',
-          redirect: '/list/tab1'
+          redirect: '/list/tab1',
         }
       ]
     },
@@ -44,6 +57,10 @@ export default new VueRouter({
     {
       path:'/profile',
       component:Profile
+    },
+    {
+      path:'/list/tab3',
+      component:Allpinpai
     },
     {
       path:'/',

@@ -1,39 +1,15 @@
 <template>
   <div id="wrap">
-    <Header/>
+    <Header :home="home.menus"/>
    <!--首页轮播-->
     <div class="swiper-container">
       <nav class="msite_nav border-1px">
         <div class="swiper-container">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" >
-              <a href="javascript:" class="link_to_food" >
-                <img class="img1" src="./images/baolu.jpg">
-                <img class="img2" src="./images/dog.jpg" >
-              </a>
-            </div>
-            <div class="swiper-slide" >
-              <a href="javascript:" class="link_to_food" >
-                <img class="img1" src="./images/fumo.jpg">
-                <img class="img2" src="./images/dog.jpg" >
-              </a>
-            </div>
-            <div class="swiper-slide" >
-              <a href="javascript:" class="link_to_food" >
-                <img class="img1" src="./images/haiwai.jpg">
-                <img class="img2" src="./images/dog.jpg" >
-              </a>
-            </div>
-            <div class="swiper-slide" >
-              <a href="javascript:" class="link_to_food" >
-                <img class="img1" src="./images/ouguan.jpg">
-                <img class="img2" src="./images/dog.jpg" >
-              </a>
-            </div>
-            <div class="swiper-slide" >
-              <a href="javascript:" class="link_to_food" >
-                <img class="img1" src="./images/zhuliang.jpg">
-                <img class="img2" src="./images/dog.jpg" >
+            <div class="swiper-slide" v-for="(dogs,index) in home.dog_banner" :key="index">
+              <a href="javascript:" class="link_to_food"  >
+                <img class="img1" v-lazy="dogs">
+                <img class="img2" v-lazy="home.dog_img" >
               </a>
             </div>
           </div>
@@ -45,120 +21,87 @@
    <!--首页列表区-->
     <div class="nav-list">
       <ul class="nav-top">
-        <li class="f1">
+        <li class="f1" v-for="(list,index) in home.menu_list" :key="index">
           <a href="javascript:;">
-            <img src="./nav/img1.jpg" >
+            <img v-lazy="list" >
           </a></li>
-        <li class="f1">
-          <a href="javascript:;">
-            <img src="./nav/img2.jpg" >
-          </a></li>
-        <li class="f1">
-          <a href="javascript:;">
-            <img src="./nav/img3.jpg" >
-          </a></li>
-        <li class="f1">
-          <a href="javascript:;">
-            <img src="./nav/img4.jpg" >
-          </a></li>
-        <li class="f1">
-          <a href="javascript:;">
-            <img src="./nav/img5.jpg" >
-          </a></li>
-        <li class="f1">
-          <a href="javascript:;">
-            <img src="./nav/img6.jpg" >
-          </a></li>
-        <li class="f1">
-          <a href="javascript:;">
-            <img src="./nav/img7.jpg" >
-          </a></li>
-        <li class="f1">
-          <a href="javascript:;">
-            <img src="./nav/img8.jpg" >
-          </a></li>
-        <li class="f1">
-          <a href="javascript:;">
-            <img src="./nav/img9.jpg" >
-          </a></li>
-        <li class="f1">
-          <a href="javascript:;">
-            <img src="./nav/img10.jpg" >
-          </a></li>
-      </ul>
-    </div>
-    <!--正品秒杀大牌一折起-->
+        </ul>
+      </div>
+      <!--正品秒杀大牌一折起-->
     <div class="banner_item">
-     <img class="img-1" src="./nav/img11.jpg" >
+     <img class="img-1" v-lazy="home.miaosha" >
      </div>
      <!--品牌力量-->
     <div class="powwer">
       <a href="javascript:;" >
-      <img src="./nav/img14.jpg" class="pinpai">
+      <img v-lazy="home.brand_power" class="pinpai">
       </a>
       <a href="javascript:;" >
-      <img src="./nav/img15.gif" class="gif">
+      <img v-lazy="home.gif" class="gif">
       </a>
     </div>
      <!--VIP尊享-->
     <div class="vip">
       <a href="javascript:;" >
-        <img src="./nav/img16.jpg" class="vipp">
+        <img v-lazy="home.vip" class="vipp">
       </a>
     </div>
     <!--vip活动-->
     <div class="action">
-      <div class="action-left">
+      <div class="action-left" v-for="(vip,index) in home.vip_services" :key="index">
         <a href="javascript:;">
-          <img src="./nav/img17.jpg" alt="">
+          <img v-lazy="vip" >
         </a>
-        <a href="javascript:;">
-          <img src="./nav/img18.jpg" alt="">
-        </a>
-      </div>
-      <div class="action-right">
-        <a href="javascript:;">
-          <img src="./nav/img19.jpg" alt="">
-        </a>
-        <a href="javascript:;">
-          <img src="./nav/img20.jpg" alt="">
-        </a>
-      </div>
-    </div>
-    <!--1折团-->
+       </div>
+     </div>
+     <!--1折团-->
     <div class="yizhe">
-      <img src="./nav/img21.jpg" class="pointer">
+      <img v-lazy="home.dapaituan" class="pointer">
       <a href="javascript:;" class="pointer-bottom">
-        <img src="./nav/img22.jpg">
+        <img v-lazy="home.haohuo">
       </a>
     </div>
     <!--大牌好货-->
     <div class="shops">
-      <div class="divimg">
-        <a href="javascript:;" v-for="(img,index) in divimg" :key="index" class="default_bg">
-          <img :src="`../../../static/image/divimg-${img}`">
-        </a>
+      <div class="divimg" v-for="(dapai,index) in home.haohuo_list">
+        <ul class="dapai-left">
+          <li v-for="(img,index) in dapai.left" :key="index" class="default_bg">
+            <a href="javascript:;">
+            <!--<img v-lazy="`../../../static/image/divimg-${img}`">-->
+              <img v-lazy="img">
+          </a>
+          </li>
+        </ul>
+        <ul class="dapai-left">
+          <li v-for="(img,index) in dapai.right" :key="index" class="default_bg">
+            <a href="javascript:;">
+              <img v-lazy="img">
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
     <!--最惨奖-->
     <div class="jiangli">
-      <img src="./food-img/img1.jpg" class="jiang1" >
-      <img src="./food-img/img2.jpg" class="jiang2">
+      <img v-lazy="home.zuican" class="jiang1" >
+      <img v-lazy="home.zuican_content" class="jiang2">
       <div>
-        <img src="./food-img/img3.jpg" style="height: 90px" >
+        <img v-lazy="home.special" style="height: 90px" >
       </div>
-      <div class="jiang-food" >
-          <img class="shafa" src="./food-img/img4.jpg" >
+      <div class="jiang-food" v-if="home.special_list" >
+          <img class="shafa" v-lazy="home.special_list[0]" >
           <div class="jiang-right">
-            <img src="./food-img/img5.jpg">
-            <img src="./food-img/img6.jpg" >
+            <img v-lazy="home.special_list[1]">
+            <img v-lazy="home.special_list[2]" >
         </div>
       </div>
     </div>
     <!--特色栏目-->
     <div class="tese">
-        <a href="javascript:;" v-for="(img,index) in divimg" :key="index" class="default_bg">
-          <img :src="`../../../static/image/divimg-${img}`">
+      <img v-lazy="home.lanmu" style="width: 100%;vertical-align: middle" >
+        <a href="javascript:;" v-for="(img,index) in home.lanmu_list" :key="index" class="default_bg">
+          <!--<img :src="`../../../static/image/divimg-${img}`">-->
+          <img v-lazy="img" >
         </a>
     </div>
     <!--底部栏-->
@@ -189,6 +132,7 @@
   import BSroll from 'better-scroll'
   import Swiper from 'swiper'
   import 'swiper/dist/css/swiper.min.css'
+  import {mapState} from 'vuex'
   export default{
     data(){
       return{
@@ -198,7 +142,7 @@
       }
     },
     mounted(){
-
+      this.$store.dispatch('reqmenus',()=>{
       this.$nextTick(() => {
         //轮播图
         const swiper = new Swiper('.swiper-container', {
@@ -208,30 +152,35 @@
           }
         })
       })
+      })
+    },
+    computed:{
+      ...mapState(['home'])
     },
     components:{Header}
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   #wrap
-    background #ddd
+    background #000
     width 100%
     position relative
     padding-bottom 50px
     .swiper-container
       margin-top 40px
       width 100%
-      .swiper-slide
-        width 100%
-        height 431px
-        .img1
+      .swiper-wrapper
+        .swiper-slide
           width 100%
-          height 160px
-          vertical-align middle
-        .img2
-          width 100%
-          height 271px
-          vertical-align middle
+          height 431px
+          .img1
+            width 100%
+            height 160px
+            vertical-align middle
+          .img2
+            width 100%
+            height 271px
+            vertical-align middle
     .nav-list
       width 100%
       overflow hidden
@@ -296,13 +245,15 @@
     .shops
       width 100%
       overflow hidden
-      .default_bg
-        width 50%
-        height 225px
+      .dapai-left
         float left
-        &>img
-          width 100%
-          height 100%
+        &>.default_bg
+          width 50%
+          height 225px
+          float left
+          img
+            width 100%
+
 
     .jiangli
       font-size 0
@@ -332,11 +283,12 @@
       overflow hidden
       .default_bg
         width 50%
-        height 128px
+        height 120px
         float left
         &>img
           width 100%
-          height 100%
+          /*height 100%*/
+          vertical-align middle
 
     .footer
       background  #fff

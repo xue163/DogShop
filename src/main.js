@@ -4,11 +4,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-// import VueLazyload from 'vue-lazyload'
-// import loading from './common/images/loading.gif'
-// Vue.use(VueLazyload,{
-//   loading
-// })
+import VueLayload from 'vue-lazyload'
+import loading from './common/images/load.png'
+
+Vue.use(VueLayload,{
+  loading
+})
 import './mock/index'
 
 /* eslint-disable no-new */

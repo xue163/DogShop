@@ -19,41 +19,11 @@
 
     <div class="list-wrap" id="pp">
       <ul class="headerBottom" ref="scrollUI">
-        <li>
-          <a href="javascript:;">
-            <span>首页</span>
+        <li v-for="(menu,index) in home" :key="index">
+          <a href="javacript:;">
+            <span>{{menu.menu_name}}</span>
           </a>
         </li>
-        <li>
-          <a href="javascript:;">
-            <span> 狗狗主粮</span>
-          </a>
-        </li>
-        <li>
-          <a href="javascript:;">
-            <span> 服饰城</span>
-          </a>
-        </li>
-        <li>
-          <a href="javascript:;">
-          <span> 医疗保健</span>
-        </a>
-        </li>
-        <li>
-          <a href="javascript:;">
-            <span>  零食玩具</span>
-          </a>
-        </li>
-        <li>
-          <a href="javascript:;">
-            <span>日用外出</span>
-          </a>
-        </li>
-        <li>
-          <a href="javascript:;">
-            <span>美容美液</span>
-          </a>
-          </li>
       </ul>
     </div>
   </div>
@@ -62,6 +32,9 @@
 <script type="text/javascript">
   import BSroll from 'better-scroll'
   export default{
+    props:{
+      home:Array
+    },
     mounted(){
       this.$nextTick(() => {
         new BSroll('#pp',{
