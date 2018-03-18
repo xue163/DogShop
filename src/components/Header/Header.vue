@@ -1,7 +1,7 @@
 <template>
   <div id="wrap">
    <div class="headerTop">
-     <div class="address">
+     <div class="address"  @click="$router.push('/miste/address')">
      <a href="javascript:;">狗狗|重庆
        <i class="iconfont icon-sanjiao"></i>
      </a>

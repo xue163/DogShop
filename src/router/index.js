@@ -11,6 +11,7 @@ import Profile from '../pages/Profile/Profile.vue'
 import Fenlei from '../pages/List/Fenlei/Fenlei.vue'
 import Pinpai from '../pages/List/Pinpai/Pinpai.vue'
 import Allpinpai from '../pages/List/Allpinpai/Allpinpai.vue'
+import Address from '../pages/Msite/Address/Address.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,10 @@ export default new VueRouter({
       meta:{
         showFoot:true
       }
+    },
+    {
+      path:'/miste/address',
+      component:Address
     },
     {
       path:'/list',

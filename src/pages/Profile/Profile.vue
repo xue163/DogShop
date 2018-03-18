@@ -40,7 +40,7 @@
             <div class="phone-tops">
               <div class="putong-top">
                 <span class="icon1"></span>
-                <input type="text" class="text" placeholder="已注册的手机号" v-model="phonename">
+                <input type="text" maxlength="11" class="text" placeholder="已注册的手机号" v-model="phonename">
               </div>
             </div>
             <!--获取一次性验证码-->
@@ -73,7 +73,7 @@
       </form>
     </div>
   </header>
-    <AlertTip v-if="alertShow" :alertText="alertText" />
+    <AlertTip v-if="alertShow" :alertText="alertText" @closeTip="closeTip"/>
   </div>
 </template>
 <script type="text/javascript">
@@ -95,6 +95,9 @@
       }
     },
     methods:{
+      closeTip(){
+        this.alertShow = false
+      },
       goto(){   //回退按钮
         this.$router.back()
       },
@@ -102,55 +105,63 @@
         this.putong = !this.putong
         this.phone = !this.phone
       },
+
       changeURL(){//点击一次性验证码进行切换
         this.url = 'http://localhost:3000/captcha?t='+Math.random()
       },
       //点击获取动态码
    async getCode(){
-//        this.computeTime = 60
-//        let t = setInterval(()=>{
-//          this.computeTime--
-//          if(computeTime<=0){
-//            clearInterval(t)
-//          }
-//        },1000)
-//          const {phonename} =  this//发送手机号收取短信验证码
-//         const result = await reqmsgcode({phonename})
-//       if(result.code===1){
-//          this.alertShow = true
-//         this.alertText = result.msg
-//       }
+        this.computeTime = 60
+        let t = setInterval(()=>{
+          this.computeTime--
+          if(this.computeTime<=0){
+            clearInterval(t)
+          }
+        },1000)
+          const {phonename} =  this//发送手机号收取短信验证码
+         const result = await reqmsgcode(phonename)
+//     const result = await reqmsgcode()
+       if(result.code===1){
+          this.alertShow = true
+         this.alertText = result.msg
+       }
      console.log(111)
       },
 
 
       //提交按钮
      async loginto(){
+           let result
         if(this.putong){//如果是普通登录
-          const {rightPhone,putongpwd} = this
+          const {rightPhone,putongpwd,putongname} = this
          if(!rightPhone) {//用户手机号邮箱验证
             this.alertShow = true
-           this.alertShow = '普通登录的请输入正确的手机号邮箱'
+           this.alertText = '普通登录的请输入正确的手机号邮箱'
+           return
          }else if(!putongpwd){//普通登录验证邮箱号
            this.alertShow = true
-           this.alertShow = '普通登录的请输入密码'
+           this.alertText = '普通登录的请输入密码'
+           return
+         }else{
+             result = await pwdLogin(putongname,putongpwd,'123')
          }
-        }else if(this.phone){//如果是手机动态验证码登录
+        }else  if(this.phone){//如果是手机动态验证码登录
           const {phonename,captcha,code} = this //获取用户名，一次性验证码，动态密码
             if(!phonename){
               this.alertShow = true
               this.alertText = '请输入正确的用户名'
+              return
             }else if(!captcha){
               this.alertShow = true
               this.alertText = '请输入正确的验证码'
+              return
+            }else{
+               result = await reqcodelogin(phonename,code)
             }
-            const pwd = 123456
-//          const result = await reqcodelogin({phonename,pwd,code})
-//            if(result.code===0){
-//              const userInfo = result.data
-//              this.$store.dispatch('saveUserInfo',userInfo)//保存用户信息
-//
-//            }
+
+            if(result.code===0){
+              console.log('短信发送成功')
+            }
           if(result.code===1){
             this.alertShow = true
             this.alertText = result.msg//如果输入的一次性验证码不正确，交给后台去验证，返回后台的验证信心

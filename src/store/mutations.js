@@ -14,6 +14,6 @@ export default {
     state.home = home
   },
   [RECEIVE_ALLPINPAI](state,{Allpinpai}){
-    state.Allpinpai = Allpinpai
+    state.allpinpai = Allpinpai
   }
 }

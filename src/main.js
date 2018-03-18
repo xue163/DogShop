@@ -6,6 +6,9 @@ import router from './router'
 import store from './store'
 import VueLayload from 'vue-lazyload'
 import loading from './common/images/load.png'
+import {Button} from 'mint-ui'
+
+Vue.component(Button.name,Button)
 
 Vue.use(VueLayload,{
   loading

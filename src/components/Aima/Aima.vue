@@ -7,6 +7,7 @@
     <span class="erweima" @click="show"></span>
   </header>
   <!--点击显示隐藏区域-->
+  <transition name="slide">
   <div class="header-quick" v-show="isShow" >
     <a href="javascript:;">
       <span class="icon1"> </span>
@@ -26,6 +27,7 @@
       <p>我的e宠</p>
     </a>
   </div>
+  </transition>
 </div>
 </template>
 <script type="text/javascript">
@@ -50,14 +52,18 @@
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../common/stylus/mixin.styl"
- #top-cart
+  #top-cart
+    padding-top 50px
     header
       bottom-border-1px(#ddd)
       position fixed
+      /*position relative*/
       top 0
       left 0
       right 0
+      z-index 100
       height 50px
+      background #fff
       line-height 50px
       .aback
         display inline-block
@@ -84,14 +90,23 @@
         top 17px
         right 0
     .header-quick
-      margin-top 55px
+      bottom-border-1px(#ddd)
+      /*margin-top 50px*/
       width 100%
+      height 50px
+      overflow hidden
       display flex
       justify-content center
       align-items center
       padding-bottom 10px
-      border-bottom 1px solid #ddd
+      /*border-bottom 1px solid #ddd*/
       background #fff
+      &.slide-enter-active
+        transition  all 1s ease-out
+      &.slide-leave-active
+        transition all 1.5s ease-out
+      &.slide-enter,&.slide-leave-to
+        height 0
       >a
         flex 1
         text-align center

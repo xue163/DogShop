@@ -2,7 +2,7 @@
  * Created by HP on 2018/3/14.
  */
 import {getURL} from '../api'
-import {RECEIVE_CATES,RECEIVE_BRAND,RECEIV_HOME,RECEIVE_PINPAI} from './mutation-types'
+import {RECEIVE_CATES,RECEIVE_BRAND,RECEIV_HOME,RECEIVE_ALLPINPAI } from './mutation-types'
 
 export default {
   //获取分类-分类列表
@@ -33,12 +33,13 @@ export default {
       console.log('首页请求失败')
     }
   },
-  //获取所有品牌信心
- async reqAllpinpai({commit}){
+  //获取所有品牌信息
+ async reqAllpinpai({commit},callback){
     const result = (await getURL('/Allpinpai')).data
    if(result.code===0){
       const Allpinpai = result.data
       commit(RECEIVE_ALLPINPAI,{Allpinpai})
+     callback&&callback()
    }
   }
 }
