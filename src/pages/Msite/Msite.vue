@@ -31,6 +31,63 @@
     <div class="banner_item">
      <img class="img-1" v-lazy="home.miaosha" >
      </div>
+    <!--秒杀轮播图-->
+    <div class="surprise_day">
+     <div class="surprise">
+       <img src="./new.png">
+       <div class="titimg">
+           <span>本场结束</span>
+           <span class="time1-1">20</span>
+           <span>:</span>
+           <span class="time1-1">00</span>
+           <img src="./more.png" >
+       </div>
+     </div>
+      <div class="ul1" ref="ul1">
+      <div class="goods-wrap">
+      <div class="cred">
+        <div class="goodsimg"><img src="./goods.jpg" ></div>
+        <p class="p1">￥1.90</p>
+        <p class="p2">省17.10</p>
+      </div>
+      <div class="cred">
+        <div class="goodsimg"><img src="./goods.jpg" ></div>
+        <p  class="p1">￥1.90</p>
+        <p class="p2">省17.10</p>
+      </div>
+      <div class="cred">
+        <div class="goodsimg"><img src="./goods.jpg" ></div>
+        <p  class="p1">￥1.90</p>
+        <p class="p2">省17.10</p>
+      </div>
+      <div class="cred">
+        <div class="goodsimg"><img src="./goods.jpg" ></div>
+        <p  class="p1">￥1.90</p>
+        <p class="p2">省17.10</p>
+      </div>
+      <div class="cred">
+        <div class="goodsimg"><img src="./goods.jpg" ></div>
+        <p  class="p1">￥1.90</p>
+        <p class="p2">省17.10</p>
+      </div>
+      <div class="cred">
+        <div class="goodsimg"><img src="./goods.jpg" ></div>
+        <p  class="p1">￥1.90</p>
+        <p class="p2">省17.10</p>
+      </div>
+      <div class="cred">
+        <div class="goodsimg"><img src="./goods.jpg" ></div>
+        <p  class="p1">￥1.90</p>
+        <p class="p2">省17.10</p>
+      </div>
+      <div class="cred">
+        <div class="goodsimg"><img src="./goods.jpg" ></div>
+        <p  class="p1">￥1.90</p>
+        <p class="p2">省17.10</p>
+      </div>
+      </div>
+      </div>
+    </div>
      <!--品牌力量-->
     <div class="powwer">
       <a href="javascript:;" >
@@ -129,7 +186,7 @@
 </template>
 <script type="text/javascript">
   import Header from '../../components/Header/Header.vue'
-  import BSroll from 'better-scroll'
+  import BScroll from 'better-scroll'
   import Swiper from 'swiper'
   import 'swiper/dist/css/swiper.min.css'
   import {mapState} from 'vuex'
@@ -151,8 +208,19 @@
             el: '.swiper-pagination'
           }
         })
+       this._initScroll()
+//        new BScroll(this.$refs.ul1, {scrollX: true,click: true})
       })
       })
+    },
+    methods:{
+     _initScroll(){
+       this.s = new BScroll(this.$refs.ul1,{
+
+         click:true,
+         scrollX: true,
+       })
+     }
     },
     computed:{
       ...mapState(['home'])
@@ -199,6 +267,44 @@
       img
         width 100%
         height 98px
+
+    .surprise_day
+      background #fff
+      position relative
+      /*height 200px*/
+      .surprise
+        overflow hidden
+        padding 6px
+        >img
+          width 85px
+        .titimg
+           float right
+           font-size 13px
+           >img
+             width 67.5px
+             vertical-align middle
+           .time1-1
+              border 1px solid #ddd
+
+
+      .ul1
+        width 80px
+        .goods-wrap
+           display flex
+          .cred
+            display flex
+            flex-wrap wrap
+            justify-content center
+            .goodsimg
+              >img
+                width 80px
+            .p1
+              color red
+              font-size 14px
+              margin  5px 0
+            .p2
+              font-size 12px
+              color #999
 
     .powwer
       width 100%

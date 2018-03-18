@@ -13,11 +13,12 @@
          <span>当前默认地址：重庆  渝中区</span>
         </div>
         <ul class="page-bottom">
-         <li>重庆</li>
-          <li>重庆</li>
-          <li>重庆</li>
-          <li>重庆</li>
-          <li>重庆</li>
+          <v-distpicker type="mobile" province="北京市" city="广州市" area="海珠区"></v-distpicker>
+         <!--<li>重庆</li>-->
+          <!--<li>重庆</li>-->
+          <!--<li>重庆</li>-->
+          <!--<li>重庆</li>-->
+          <!--<li>重庆</li>-->
         </ul>
       </div>
     </div>
@@ -25,6 +26,7 @@
 </template>
 <script type="text/javascript">
   import Aima from  '../../../components/Aima/Aima.vue'
+  import Dpicker from 'v-distpicker'
   export default{
     data(){
       return{
