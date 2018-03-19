@@ -77,6 +77,7 @@
   </div>
 </template>
 <script type="text/javascript">
+  import {reqmsgcode,pwdLogin,reqcodelogin} from '../../api/index'
   import AlertTip from '../../components/AlertTip/AlertTip.vue'
   export default{
     data(){

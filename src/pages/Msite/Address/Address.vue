@@ -10,16 +10,11 @@
      </div>
       <div class="address-box">
         <div class="page-top">
-         <span>当前默认地址：重庆  渝中区</span>
-        </div>
-        <ul class="page-bottom">
+         <span>当前默认地址：</span>
           <v-distpicker type="mobile" province="北京市" city="广州市" area="海珠区"></v-distpicker>
-         <!--<li>重庆</li>-->
-          <!--<li>重庆</li>-->
-          <!--<li>重庆</li>-->
-          <!--<li>重庆</li>-->
-          <!--<li>重庆</li>-->
+          <ul class="page-bottom">
         </ul>
+        </div>
       </div>
     </div>
   </div>

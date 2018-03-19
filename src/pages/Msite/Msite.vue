@@ -4,12 +4,12 @@
    <!--首页轮播-->
     <div class="swiper-container">
       <nav class="msite_nav border-1px">
-        <div class="swiper-container">
+        <div class="swiper-container ul2">
           <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="(dogs,index) in home.dog_banner" :key="index">
               <a href="javascript:" class="link_to_food"  >
-                <img class="img1" v-lazy="dogs">
-                <img class="img2" v-lazy="home.dog_img" >
+                <img class="img1" :src="dogs">
+                <img class="img2" :src="home.dog_img" >
               </a>
             </div>
           </div>
@@ -32,7 +32,7 @@
      <img class="img-1" v-lazy="home.miaosha" >
      </div>
     <!--秒杀轮播图-->
-    <div class="surprise_day">
+    <div class="surprise_day ">
      <div class="surprise">
        <img src="./new.png">
        <div class="titimg">
@@ -43,44 +43,44 @@
            <img src="./more.png" >
        </div>
      </div>
-      <div class="ul1" ref="ul1">
-      <div class="goods-wrap">
-      <div class="cred">
+      <div class="ul1 " >
+      <div class="goods-wrap swiper-wrapper ">
+      <div class="cred swiper-slide">
         <div class="goodsimg"><img src="./goods.jpg" ></div>
         <p class="p1">￥1.90</p>
         <p class="p2">省17.10</p>
       </div>
-      <div class="cred">
+      <div class="cred swiper-slide">
         <div class="goodsimg"><img src="./goods.jpg" ></div>
         <p  class="p1">￥1.90</p>
         <p class="p2">省17.10</p>
       </div>
-      <div class="cred">
+      <div class="cred swiper-slide">
         <div class="goodsimg"><img src="./goods.jpg" ></div>
         <p  class="p1">￥1.90</p>
         <p class="p2">省17.10</p>
       </div>
-      <div class="cred">
+      <div class="cred swiper-slide">
         <div class="goodsimg"><img src="./goods.jpg" ></div>
         <p  class="p1">￥1.90</p>
         <p class="p2">省17.10</p>
       </div>
-      <div class="cred">
+      <div class="cred swiper-slide">
         <div class="goodsimg"><img src="./goods.jpg" ></div>
         <p  class="p1">￥1.90</p>
         <p class="p2">省17.10</p>
       </div>
-      <div class="cred">
+      <div class="cred swiper-slide">
         <div class="goodsimg"><img src="./goods.jpg" ></div>
         <p  class="p1">￥1.90</p>
         <p class="p2">省17.10</p>
       </div>
-      <div class="cred">
+      <div class="cred swiper-slide">
         <div class="goodsimg"><img src="./goods.jpg" ></div>
         <p  class="p1">￥1.90</p>
         <p class="p2">省17.10</p>
       </div>
-      <div class="cred">
+      <div class="cred swiper-slide">
         <div class="goodsimg"><img src="./goods.jpg" ></div>
         <p  class="p1">￥1.90</p>
         <p class="p2">省17.10</p>
@@ -202,23 +202,22 @@
       this.$store.dispatch('reqmenus',()=>{
       this.$nextTick(() => {
         //轮播图
-        const swiper = new Swiper('.swiper-container', {
+        const swiper = new Swiper('.ul2', {
           loop: true,
           pagination: {
             el: '.swiper-pagination'
           }
         })
-       this._initScroll()
-//        new BScroll(this.$refs.ul1, {scrollX: true,click: true})
+
+        this._initScroll()
       })
       })
     },
     methods:{
      _initScroll(){
-       this.s = new BScroll(this.$refs.ul1,{
-
-         click:true,
-         scrollX: true,
+       new Swiper('.ul1',{
+         freeMode:true,
+         slidesPerView:4,
        })
      }
     },
@@ -248,7 +247,7 @@
           .img2
             width 100%
             height 271px
-            vertical-align middle
+            vertical-algn middle
     .nav-list
       width 100%
       overflow hidden
@@ -288,7 +287,6 @@
 
 
       .ul1
-        width 80px
         .goods-wrap
            display flex
           .cred
